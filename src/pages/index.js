@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from 'gatsby'
 import styled, { createGlobalStyle , ThemeProvider } from "styled-components"
-import darkTheme from './utils/theme.js'
+import darkTheme from '../utils/theme.js'
 
 const GlobalStyle = createGlobalStyle`
   body, html {
@@ -22,7 +22,7 @@ const StyledWrapper = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background: ${ ({theme})=>theme.colors.pink };
+  background: ${ ({theme})=>theme.colors.coral };
   width: 100vw;
   height: 100vh;
   color: ${ ({theme})=>theme.colors.white };
@@ -37,19 +37,38 @@ const Button = styled(Link)`
   border: 2px solid;
   border-radius: 50px;
   cursor: pointer;
+
   position: relative;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  display: flex;
 
   padding: 10px 15px;
   text-decoration: none;
   color: white;
   font-weight: ${ ({theme})=>theme.fonts.semiBold };
 
-  box-shadow: none;
-  transition: box-shadow .2s ease-in-out;
-  will-change: box-shadow;
 
-  :hover{
-    box-shadow: 0px 2px 15px 0px rgba(0,0,0,0.2);
+  ::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 103%;
+    height: 103%;
+
+    border-radius: 50px;
+
+    box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.3);
+    opacity: 0;
+
+    transition: opacity .2s ease-in-out;
+    will-change: opacity;
+  }
+
+  :hover ::after{
+    opacity: 1;
   }
 `
 
@@ -59,7 +78,7 @@ const IndexPage = () => (
       <GlobalStyle />
       <StyledWrapper>
         <H1>Hi People</H1>
-        <Button to='about'>About</Button>
+          <Button to='about'>About</Button>
       </StyledWrapper>
     </>
   </ThemeProvider>
