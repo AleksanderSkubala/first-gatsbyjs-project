@@ -8,4 +8,5 @@ module.exports = {
     // 'gatsby-transformer-sharp',
     // 'gatsby-plugin-sharp',
   ],
+  pathPrefix: `/first-gatsby`,
 }
